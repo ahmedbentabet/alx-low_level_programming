@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-/*
+/**
  * main - Prints a string without using puts or printf
  *
  * Return: Always 1
