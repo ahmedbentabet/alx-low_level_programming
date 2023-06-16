@@ -12,9 +12,9 @@ int main(void)
 	int n1, n2;
 
 	n1 = 0;
+	n2 = 1;
 	while (n1 < 100)
 	{
-		n2 = 1;
 		while (n2 < 100)
 		{
 			putchar('0' + n1 / 10);
@@ -22,7 +22,7 @@ int main(void)
 			putchar(' ');
 			putchar('0' + n2 / 10);
 			putchar('0' + n2 % 10);
-			if (n1 != 98 || n2 != 99)
+			if (n1 != 98)
 			{
 				putchar(',');
 				putchar(' ');
@@ -30,6 +30,7 @@ int main(void)
 			n2++;
 		}
 		n1++;
+		n2 = n1 + 1;
 	}
 	putchar('\n');
 	return (0);
