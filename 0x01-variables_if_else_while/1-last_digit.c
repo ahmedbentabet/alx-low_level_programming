@@ -13,12 +13,11 @@
 int main(void)
 {
 	int n;
+	int r;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
 	/* r is the last digit of n */
-	int r;
-
 	r = n % 10;
 	if (r > 5)
 	{
