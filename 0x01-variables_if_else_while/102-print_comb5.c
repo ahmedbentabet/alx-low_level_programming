@@ -12,7 +12,7 @@ int main(void)
 	int n1, n2;
 
 	n1 = 0;
-	while (n1 < 99)
+	while (n1 < 100)
 	{
 		n2 = 1;
 		while (n2 < 100)
@@ -30,7 +30,6 @@ int main(void)
 			n2++;
 		}
 		n1++;
-		n2 = n1 + 1;
 	}
 	putchar('\n');
 	return (0);
