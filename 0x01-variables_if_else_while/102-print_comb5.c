@@ -9,36 +9,23 @@
  */
 int main(void)
 {
-	int n1, n2, n3, n4;
+	int n1, n2;
 
-	n1 = 48;
-	while (n1 < 58)
+	n1 = 0;
+	while (n1 < 99)
 	{
-		n2 = 48;
-		while (n2 < 58)
+		n2 = 1;
+		while (n2 < 100)
 		{
-			n3 = 48;
-			while (n3 < 58)
+			putchar('0' + n1 / 10);
+			putchar('0' + n1 % 10);
+			putchar(' ');
+			putchar('0' + n2 / 10);
+			putchar('0' + n2 % 10);
+			if (n1 != 98 || n2 != 99)
 			{
-				n4 = 48;
-				while (n4 < 58)
-				{
-					if (n1 * 10 + n2 < n3 * 10 + n4)
-					{
-						putchar(n1);
-						putchar(n2);
-						putchar(' ');
-						putchar(n3);
-						putchar(n4);
-						if (n1 * 10 + n2 != 626)
-						{
-							putchar(',');
-							putchar(' ');
-						}
-					}
-					n4++;
-				}
-				n3++;
+				putchar(',');
+				putchar(' ');
 			}
 			n2++;
 		}
