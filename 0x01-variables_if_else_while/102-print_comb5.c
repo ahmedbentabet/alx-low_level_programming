@@ -30,7 +30,7 @@ int main(void)
 						putchar(' ');
 						putchar(n3);
 						putchar(n4);
-						if (n1 != 57 || n2 != 56)
+						if (n1 * 10 + n2 != 626)
 						{
 							putchar(',');
 							putchar(' ');
