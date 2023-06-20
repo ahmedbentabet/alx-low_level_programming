@@ -42,5 +42,4 @@ void times_table(void)
 		_putchar('\n');
 		n1++;
 	}
-	_putchar('\n');
 }
