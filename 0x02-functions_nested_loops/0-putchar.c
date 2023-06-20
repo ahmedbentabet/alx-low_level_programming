@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * main - Entry point of the program
+ * main - Entry point
  *
  * Description: Prints _putchar, followed by a new line.
  *
@@ -17,5 +17,6 @@ int main(void)
 	_putchar('h');
 	_putchar('a');
 	_putchar('r');
+	_putchar('\n');
 	return (0);
 }
