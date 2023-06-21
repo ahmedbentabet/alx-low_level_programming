@@ -2,6 +2,7 @@
 
 /**
  * print_times_table - Prints the n times table, starting with 0.
+ * @n: the number of the times table.
  */
 void print_times_table(int n)
 {
@@ -12,7 +13,7 @@ void print_times_table(int n)
 
 	for (n1 = 0; n1 < n + 1; n1++)
 	{
-		for (n2 = 0; n2 < n +1; n2++)
+		for (n2 = 0; n2 < n + 1; n2++)
 		{
 			int a = n1 * n2;
 
