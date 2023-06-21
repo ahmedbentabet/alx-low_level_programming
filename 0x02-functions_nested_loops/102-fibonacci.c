@@ -15,11 +15,11 @@ int main(void)
 	{
 		if (count == 49)
 		{
-			printf("%llu\n", current);
+			printf("%lu\n", current);
 		}
 		else
 		{
-			printf("%llu, ", current);
+			printf("%lu, ", current);
 		}
 		next = previous + current;
 		previous = current;
@@ -28,4 +28,3 @@ int main(void)
 	}
 	return 0;
 }
-
