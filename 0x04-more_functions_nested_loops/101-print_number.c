@@ -6,7 +6,7 @@
  */
 void print_number(int n)
 {
-	long long m = n;
+	long int m = n;
 
 	if (m < 0)
 	{
