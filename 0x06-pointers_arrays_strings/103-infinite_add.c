@@ -1,46 +1,39 @@
 #include "main.h"
 
 /**
- * add_strings - Adds the numbers stored in two strings.
- * @n1: The string containing the first number to be added.
- * @n2: The string containing the second number to be added.
- * @r: The buffer to store the result.
- * @r_idx: The current index of the buffer.
+ * add_strings - Adds two string numbers and stores the result in a buffer
+ * @n1: First string number
+ * @n2: Second string number
+ * @r: Buffer to store the result
+ * @r_idx: Starting index in the buffer to store the result
  *
- * Return: If r can store the sum - a pointer to the result.
- *         If r cannot store the sum - 0.
+ * Return: Pointer to the result in the buffer
  */
 char *add_strings(char *n1, char *n2, char *r, int r_idx)
 {
-	int digit, carry = 0;
+	int digit, carry;
 
-	while (*n1 && *n2)
+	carry = 0;
+	for (; *n1 && *n2; n1--, n2--, r_idx--)
 	{
 		digit = (*n1 - '0') + (*n2 - '0');
 		digit += carry;
 		*(r + r_idx) = (digit % 10) + '0';
 		carry = digit / 10;
-		n1--;
-		n2--;
-		r_idx--;
 	}
 
-	while (*n1)
+	for (; *n1; n1--, r_idx--)
 	{
 		digit = (*n1 - '0') + carry;
 		*(r + r_idx) = (digit % 10) + '0';
 		carry = digit / 10;
-		n1--;
-		r_idx--;
 	}
 
-	while (*n2)
+	for (; *n2; n2--, r_idx--)
 	{
 		digit = (*n2 - '0') + carry;
 		*(r + r_idx) = (digit % 10) + '0';
 		carry = digit / 10;
-		n2--;
-		r_idx--;
 	}
 
 	if (carry && r_idx >= 0)
@@ -48,7 +41,6 @@ char *add_strings(char *n1, char *n2, char *r, int r_idx)
 		*(r + r_idx) = (carry % 10) + '0';
 		return (r + r_idx);
 	}
-
 	else if (carry && r_idx < 0)
 		return (0);
 
@@ -56,31 +48,23 @@ char *add_strings(char *n1, char *n2, char *r, int r_idx)
 }
 
 /**
- * infinite_add - Adds two numbers.
- * @n1: The first number to be added.
- * @n2: The second number to be added.
- * @r: The buffer to store the result.
- * @size_r: The buffer size.
+ * infinite_add - Adds two string numbers of potentially large size
+ * @n1: First string number
+ * @n2: Second string number
+ * @r: Buffer to store the result
+ * @size_r: Size of the result buffer
  *
- * Return: If r can store the sum - a pointer to the result.
- *         If r cannot store the sum - 0.
+ * Return: Pointer to the result in the buffer, or 0 on error
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int index = 0, n1_len = 0, n2_len = 0;
+	int index, n1_len = 0, n2_len = 0;
 
-	while (*(n1 + index))
-	{
+	for (index = 0; *(n1 + index); index++)
 		n1_len++;
-		index++;
-	}
 
-	index = 0;
-	while (*(n2 + index))
-	{
+	for (index = 0; *(n2 + index); index++)
 		n2_len++;
-		index++;
-	}
 
 	if (size_r <= n1_len + 1 || size_r <= n2_len + 1)
 		return (0);
