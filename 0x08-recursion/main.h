@@ -12,6 +12,7 @@ int my_sqrt(int a, int b);
 int is_prime_number(int n);
 int my_prime(int n, int divisor);
 int is_palindrome(char *s);
+int helper_palindrome(char *s, int start, int end);
 int wildcmp(char *s1, char *s2);
 
 #endif
