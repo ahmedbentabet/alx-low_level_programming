@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -16,12 +15,14 @@ char *_strdup(char *str)
 	if (str == NULL)
 		return (NULL);
 
-	dub = (char *)malloc(sizeof(str) * sizeof(char));
+	for (i = 0; str[i] != '\0'; i++)
+		;
+	dub = (char *)malloc((i + 1) * sizeof(char));
 
-	for (i = 0; i < sizeof(str); i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
 		dub[i] = str[i];
 	}
-
+	dub[i] = '\0';
 	return (dub);
 }
