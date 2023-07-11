@@ -18,6 +18,8 @@ char *_strdup(char *str)
 	for (i = 0; str[i] != '\0'; i++)
 		;
 	dub = (char *)malloc((i + 1) * sizeof(char));
+	if (dub == NULL)
+		return (NULL);
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
