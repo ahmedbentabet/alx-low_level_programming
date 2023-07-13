@@ -11,8 +11,7 @@
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	int i, j;
-	int len1, len2;
+	unsigned i, j, len1, len2_n;
 	char *new;
 
 	if (s1 == NULL)
@@ -20,12 +19,14 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (s2 == NULL)
 		s2 = "";
 
+	/* find length of s1 */
 	for (len1 = 0; s1[len1]; len1++)
 		;
-	for (len2 = 0; len2 < n && s2[len2]; len2++)
+	/* find length of the string with the first n char in s2 */
+	for (len2_n = 0; len2_n < n && s2[len2_n]; len2_n++)
 		;
 
-	new = malloc(sizeof(char) * (len1 + len2 + 1));
+	new = malloc(sizeof(char) * (len1 + len2_n + 1));
 	if (new == NULL)
 		return (NULL);
 
