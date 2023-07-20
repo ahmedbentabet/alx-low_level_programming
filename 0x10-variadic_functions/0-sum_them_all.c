@@ -3,7 +3,6 @@
 /**
  * sum_them_all - Calculates the sum of its variable number of arguments.
  * @n: The number of arguments passed to the function.
- * @...: A variable number of integers to be summed.
  *
  * Return: The sum of the integers. If n is 0, returns 0.
  */
