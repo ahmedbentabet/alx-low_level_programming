@@ -94,6 +94,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		ht->array[index] = new_node;
 	else
 	{
+		current_node = ht->array[index];
 		new_node->next = current_node;
 		ht->array[index] = new_node;
 	}
