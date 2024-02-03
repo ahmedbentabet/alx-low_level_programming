@@ -11,44 +11,44 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index;
 	hash_node_t *new_node, *current_node;
+	unsigned long int index = key_index((const unsigned char *)key, ht->size);
 
-	/*Check if the ht or key is NULL, or if the key is an empty string*/
 	if (ht == NULL || key == NULL || key[0] == '\0')
 		return (0);
 
-	/*Calculate the index where the new node should be inserted*/
-	index = key_index((const unsigned char *)key, ht->size);
+	current_node = ht->array[index];
+	while (current_node)
+	{
+		if (strcmp(current_node->key, key) == 0)
+		{
+			free(current_node->value);
+			current_node->value = strdup(value);
+			if (current_node->value == NULL)
+				return (0);
+			return (1);  /*Key found and updated*/
+		}
+		current_node = current_node->next;
+	}
 
-	new_node = (hash_node_t *)malloc(sizeof(hash_node_t));
+	new_node = (hash_node_t *)malloc(sizeof(hash_node_t)); /*Key not found*/
 	if (new_node == NULL)
 		return (0);
-
-	/*Duplicate the key and check for allocation failure*/
 	new_node->key = strdup(key);
-	if (new_node->key == NULL)
-	{
-		free(new_node);
-		return (0);
-	}
 	new_node->value = strdup(value);
-	if (new_node->value == NULL)
+	if (new_node->key == NULL || new_node->value == NULL)
 	{
 		free(new_node->key);
+		free(new_node->value);
 		free(new_node);
 		return (0);
 	}
 	new_node->next = NULL;   /*Set the next pointer of the new node to NULL*/
-
-	/*If the array at the calculated index is empty, insert the new node*/
-	if (ht->array[index] == NULL)
+	if (ht->array[index] == NULL) /*insert the new node*/
 		ht->array[index] = new_node;
-	else
-	{
-		current_node = ht->array[index]; /*If there's collision*/
-		new_node->next = current_node;
-		ht->array[index] = new_node;
-	}
+	return (1);
+	current_node = ht->array[index];
+	new_node->next = current_node; /*If there's collision*/
+	ht->array[index] = new_node;
 	return (1);
 }
