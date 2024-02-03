@@ -1,5 +1,4 @@
 #include "hash_tables.h"
-
 /**
  * hash_table_set - adds an element to the hash table
  *
@@ -11,11 +10,11 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *new_node;
 	unsigned long int index = key_index((const unsigned char *)key, ht->size);
 	hash_node_t *current_node = ht->array[index];
+	hash_node_t *new_node = (hash_node_t *)malloc(sizeof(hash_node_t));
 
-	if (ht == NULL || key == NULL || key[0] == '\0')
+	if (ht == NULL || key == NULL || key[0] == '\0' || new_node == NULL)
 		return (0);
 	while (current_node)
 	{
@@ -29,10 +28,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		}
 		current_node = current_node->next;
 	}
-
-	new_node = (hash_node_t *)malloc(sizeof(hash_node_t)); /*notFoundLetAddIt*/
-	if (new_node == NULL)
-		return (0);
+	/*Key not found, we neet to add it*/
 	new_node->key = strdup(key);
 	new_node->value = strdup(value);
 	if (new_node->key == NULL || new_node->value == NULL)
@@ -47,6 +43,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		ht->array[index] = new_node;
 	else
 	{	/*If there's collision*/
+		current_node = ht->array[index];
 		new_node->next = current_node;
 		ht->array[index] = new_node;
 	}
