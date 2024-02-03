@@ -44,9 +44,11 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	new_node->next = NULL;   /*Set the next pointer of the new node to NULL*/
 	if (ht->array[index] == NULL) /*insert the new node*/
 		ht->array[index] = new_node;
-		return (1);
-	current_node = ht->array[index];
-	new_node->next = current_node; /*If there's collision*/
-	ht->array[index] = new_node;
+	else
+	{	/*If there's collision*/
+		current_node = ht->array[index];
+		new_node->next = current_node;
+		ht->array[index] = new_node;
+	}
 	return (1);
 }
