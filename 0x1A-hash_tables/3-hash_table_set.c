@@ -1,13 +1,28 @@
 #include "hash_tables.h"
 
 /**
- * create_node - creates a new node
+ * free_node - frees the allocated memory for a node
  *
- * @key: the key for the new node
- * @value: the value for the new node
- *
- * Return: a pointer to the new node, or NULL on failure
+ * @node: the node to free
  */
+void free_node(hash_node_t *node)
+{
+	free(node->key);
+	node->key = NULL;
+	free(node->value);
+	node->value = NULL;
+	free(node);
+	node = NULL;
+}
+
+/**
+* create_node - creates a new node
+*
+* @key: the key for the new node
+* @value: the value for the new node
+*
+* Return: a pointer to the new node, or NULL on failure
+*/
 hash_node_t *create_node(const char *key, const char *value)
 {
 	hash_node_t *new_node = (hash_node_t *)malloc(sizeof(hash_node_t));
@@ -35,14 +50,14 @@ hash_node_t *create_node(const char *key, const char *value)
 }
 
 /**
- * hash_table_set - adds an element to the hash table
- *
- * @ht: the hash table you want to add or update the key/value to
- * @key: the key. key can not be an empty string
- * @value: the value associated with the key
- *
- * Return: 1 if it succeeded, 0 otherwise
- */
+* hash_table_set - adds an element to the hash table
+*
+* @ht: the hash table you want to add or update the key/value to
+* @key: the key. key can not be an empty string
+* @value: the value associated with the key
+*
+* Return: 1 if it succeeded, 0 otherwise
+*/
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index = key_index((const unsigned char *)key, ht->size);
@@ -57,22 +72,23 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		if (strcmp(current_node->key, key) == 0)
 		{
-			free(current_node->value);
+			/* free(current_node->value); */
 			current_node->value = strdup(value);
 			if (current_node->value == NULL)
+			{
+				free(current_node->key);
+				free(current_node);
 				return (0);
+			}
 			return (1); /* Key found and updated */
 		}
 		current_node = current_node->next;
 	}
 
-	/*key not found, so lets add it*/
+	/* key not found, so let's add it */
 	new_node = create_node(key, value);
 	if (new_node == NULL)
-	{
-		free(new_node);
 		return (0);
-	}
 
 	if (ht->array[index] == NULL)
 		ht->array[index] = new_node;
@@ -82,6 +98,5 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		new_node->next = current_node;
 		ht->array[index] = new_node;
 	}
-
 	return (1);
 }
